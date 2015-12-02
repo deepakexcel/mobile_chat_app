@@ -1,0 +1,13 @@
+{
+    "phonegap-facebook-plugin": {
+        "source": {
+            "type": "local",
+            "path": "/var/www/html/facebook_plugin"
+        },
+        "is_top_level": true,
+        "variables": {
+            "APP_ID": "547552195393374",
+            "APP_NAME": "untilcrimson1.0"
+        }
+    }
+}

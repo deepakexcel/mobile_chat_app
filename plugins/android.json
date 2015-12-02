@@ -1,0 +1,17 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "phonegap-facebook-plugin": {
+            "APP_ID": "547552195393374",
+            "APP_NAME": "untilcrimson1.0",
+            "PACKAGE_NAME": "com.ionicframework.chatapp169027"
+        }
+    },
+    "dependent_plugins": {}
+}
