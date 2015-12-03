@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('starter')
-            .controller('loginController', loginController);
+        .controller('loginController', loginController);
 
     function loginController($scope, $rootScope, googleLogin, $timeout, $state, facebookLogin) {
         $scope.googleLogin = function() {
@@ -10,13 +10,12 @@
             promise.then(function(data) {
                 $rootScope.googleUser = data;
                 $state.go('home');
-
             }, function(data) {
                 $scope.googleUser = data;
             });
         };
         facebookLogin.timeout();
-        $scope.facebookLogin = function() {
+         $scope.facebookLogin = function() {
             facebookLogin.login();
             self.getData();
         };

@@ -25,14 +25,11 @@ facebookLoginService.factory('facebookLogin', [
         service.login = function() {
             try {
                 facebookConnectPlugin.login(['public_profile'], function(data) {
-                console.log(data);
-                
-            }, function(data) {
-                console.log(data);
-            });
-            }catch(e){
-            }
-            
+                    console.log(data);
+                }, function(data) {
+                    console.log(data);
+                });
+            } catch (e) {}
         };
         return service;
     }
