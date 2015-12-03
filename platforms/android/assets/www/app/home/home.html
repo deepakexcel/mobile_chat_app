@@ -1,14 +1,53 @@
-
- <ion-pane style="background-image:url(img/background.jpg);">
-    <ion-header-bar class="bar-dark">
-      <h1 class="title">PostCard v1.0</h1>
+<ion-pane style="background-image:url(img/bg2.jpg);">
+    <ion-header-bar class="bar-stable">
+      <h1 class="title" style="text-align: center;">PostCard v1.0</h1>
     </ion-header-bar>
     
     <ion-content class="padding">
-      This is home page
+     <div class="list card">
+
+  <div class="item item-avatar" >
+    <img src="img/avatar.jpg" >
+    <h2>Welcome To PostCard v1.0</h2>
+    <p>{{user.name}}{{user1.name}}</p>
+  </div>
+
+<div class="list card">
+
+  <a href="#" class="item item-icon-left">
+    <i class="icon ion-person-add"></i>
+    Add Friends
+  </a>
+
+  <a href="#" class="item item-icon-left">
+    <i class="icon ion-person-stalker"></i>
+    View All Friends
+  </a>
+
+  <a href="#" class="item item-icon-left">
+    <i class="icon ion-android-microphone-off"></i>
+    Mute All Conversation
+  </a>
+
+  <a href="#" class="item item-icon-left">
+    <i class="icon ion-trash-a"></i>
+    Delete Your Account
+  </a>
+
+  <a href="#" class="item item-icon-left">
+    <i class="icon ion-settings"></i>
+    Edit Your Profile
+  </a>
+
+
+</div>
+
+  <a class="item item-icon-left assertive" href="#">
+    <i class="icon ion-android-textsms"></i>
+    Start Chating
+  </a>
+
+</div>
     </ion-content>
-    <ion-footer-bar class="bar-dark">
-      <h1 class="title">Copyright @ YuvKush 2015</h1>
-    </ion-footer-bar>
+   
   </ion-pane>
- 

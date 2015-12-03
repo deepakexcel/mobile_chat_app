@@ -9,5 +9,13 @@
             "APP_ID": "547552195393374",
             "APP_NAME": "untilcrimson1.0"
         }
+    },
+    "cordova-plugin-inappbrowser": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-inappbrowser"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }
