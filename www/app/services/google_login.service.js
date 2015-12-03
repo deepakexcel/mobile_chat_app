@@ -52,7 +52,7 @@ googleLoginService.factory('googleLogin', [
     function ($http, $q, $interval, $log, timeStorage) {
         var service = {};
         service.access_token = false;
-        service.redirect_url = 'http://localhost/networtApp/www/';
+        service.redirect_url = 'http://localhost/chatApp/www/';
         service.client_id = '260184542051-h84jscnah15adeecfh77g5p69c78vg9c.apps.googleusercontent.com';
         service.secret = 'ugJ2MMyeWkhd1hya80Q1pZlP';
         service.scope = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me';

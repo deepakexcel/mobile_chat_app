@@ -52,7 +52,7 @@ googleLoginService.factory('googleLogin', [
     function ($http, $q, $interval, $log, timeStorage) {
         var service = {};
         service.access_token = false;
-        service.redirect_url = 'http://localhost/networtApp/www/';
+        service.redirect_url = 'http://localhost/chatApp/www/';
         service.client_id = '260184542051-h84jscnah15adeecfh77g5p69c78vg9c.apps.googleusercontent.com';
         service.secret = 'ugJ2MMyeWkhd1hya80Q1pZlP';
         service.scope = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me';
@@ -60,34 +60,6 @@ googleLoginService.factory('googleLogin', [
             url = url.substring(url.indexOf('?') + 1, url.length);
 
             return url.replace('code=', '');
-
-//            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-//            var regexS = "[\\#&]" + name + "=([^&#]*)";
-//            var regex = new RegExp(regexS);
-//            var results = regex.exec(url);
-//            if (results == null)
-//                return "";
-//            else
-//                return results[1];
-
-//            var match,
-//                    pl = /\+/g, // Regex for replacing addition symbol with a space
-//                    search = /([^&=]+)=?([^&]*)/g,
-//                    decode = function (s) {
-//                        return decodeURIComponent(s.replace(pl, " "));
-//                    },
-//                    query = url;
-//
-//            var urlParams = {};
-//            while (match = search.exec(query))
-//                urlParams[decode(match[1])] = decode(match[2]);
-//
-//            if (urlParams.name) {
-//                return urlParams.name;
-//            } else {
-//                return false;
-//            }
-
         };
         service.authorize = function (options) {
             var def = $q.defer();

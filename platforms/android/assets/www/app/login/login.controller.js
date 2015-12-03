@@ -2,27 +2,23 @@
     'use strict';
 
     angular.module('starter')
-        .controller('loginController', loginController);
+            .controller('loginController', loginController);
 
     function loginController($scope, $rootScope, googleLogin, $timeout, $state, facebookLogin) {
         $scope.googleLogin = function() {
             var promise = googleLogin.startLogin();
             promise.then(function(data) {
-                $rootScope.user1 = data;
+                $rootScope.googleUser = data;
                 $state.go('home');
 
             }, function(data) {
-                $scope.googleData = data;
+                $scope.googleUser = data;
             });
         };
         facebookLogin.timeout();
         $scope.facebookLogin = function() {
-            facebookConnectPlugin.login(['public_profile'], function(data) {
-                console.log(data);
-                self.getData();
-            }, function(data) {
-                console.log(data);
-            });
+            facebookLogin.login();
+            self.getData();
         };
         self.getData = function() {
             facebookConnectPlugin.api('/me', ['public_profile'], function(data) {

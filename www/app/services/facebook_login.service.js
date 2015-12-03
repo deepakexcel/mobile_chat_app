@@ -19,10 +19,20 @@ facebookLoginService.factory('facebookLogin', [
                 }, function() {
                     console.log('Get Login Status Error');
                 });
-            } catch (e) {}
+            } catch (e) {
+            }
         };
         service.login = function() {
-           
+            try {
+                facebookConnectPlugin.login(['public_profile'], function(data) {
+                console.log(data);
+                
+            }, function(data) {
+                console.log(data);
+            });
+            }catch(e){
+            }
+            
         };
         return service;
     }
