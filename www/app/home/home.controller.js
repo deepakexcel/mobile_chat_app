@@ -2,14 +2,45 @@
     'use strict';
 
     angular.module('starter')
-            .controller('homeController', homeController);
-    function homeController($scope,$state, googleLogin) {
-//        var promise = googleLogin.startLogin();
-//        promise.then(function(data) {
-//            $scope.googleData = data;
-//        }, function(data) {
-//            $scope.googleData = data;
-//            $state.go('/');
-//        });
+        .controller('homeController', homeController);
+
+    function homeController($scope, $state, googleLogin) {
+        $scope.lists = [{
+            "name": "User",
+            "image": "img/avatar.jpg",
+            "msg": "Hii !! How Are You"
+        }, {
+            "name": "User",
+            "image": "img/avatar.jpg",
+            "msg": "Hii !! How Are You"
+        }, {
+            "name": "User",
+            "image": "img/avatar.jpg",
+            "msg": "Hii !! How Are You"
+        }, {
+            "name": "User",
+            "image": "img/avatar.jpg",
+            "msg": "Hii !! How Are You"
+        }, {
+            "name": "User",
+            "image": "img/avatar.jpg",
+            "msg": "Hii !! How Are You"
+        }, {
+            "name": "User",
+            "image": "img/avatar.jpg",
+            "msg": "Hii !! How Are You"
+        },{
+            "name": "User",
+            "image": "img/avatar.jpg",
+            "msg": "Hii !! How Are You"
+        },{
+            "name": "User",
+            "image": "img/avatar.jpg",
+            "msg": "Hii !! How Are You"
+        },{
+            "name": "User",
+            "image": "img/avatar.jpg",
+            "msg": "Hii !! How Are You"
+        }];
     }
 })();
