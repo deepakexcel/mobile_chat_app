@@ -22,8 +22,26 @@ facebookLoginService.factory('facebookLogin', [
             } catch (e) {}
         };
         service.login = function() {
-           
+            try {
+                facebookConnectPlugin.login(['public_profile'], function(data) {
+                    console.log(data);
+
+                }, function(data) {
+                    console.log(data);
+                });
+            } catch (e) {}
+
         };
+        service.api = function() {
+            try {
+                facebookConnectPlugin.api('/me', ['public_profile'], function(data) {
+                    return data;
+                });
+            } catch (e) {}
+
+        };
+
+
         return service;
     }
 ]);
