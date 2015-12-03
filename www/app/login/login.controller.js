@@ -4,11 +4,15 @@
     angular.module('starter')
         .controller('loginController', loginController);
 
-    function loginController($scope, $rootScope, googleLogin, $timeout, $state, facebookLogin) {
+    function loginController($scope, $rootScope, googleLogin, $timeout, $state, facebookLogin, homeService) {
         $scope.googleLogin = function() {
             var promise = googleLogin.startLogin();
             promise.then(function(data) {
                 $rootScope.googleUser = data;
+                homeService.set('user_id',$rootScope.googleUser.google_id);
+                homeService.set('user_email',$rootScope.googleUser.email);
+                homeService.set('user_name',$rootScope.googleUser.name);
+                homeService.set('user_picture',$rootScope.googleUser.picture);
                 $state.go('home');
             }, function(data) {
                 $scope.googleUser = data;
