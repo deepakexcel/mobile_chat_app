@@ -2,49 +2,20 @@
     'use strict';
 
     angular.module('starter')
-        .controller('homeController', homeController);
 
-    function homeController($scope, $state, googleLogin, homeService) {
+            .controller('homeController', homeController);
+
+    function homeController($scope, $rootScope, $state, googleLogin, parseService) {
         $scope.show = false;
-        $scope.showLeftMenu = function(){
+        $scope.showLeftMenu = function() {
             $scope.show = !$scope.show;
         };
-        $scope.lists = [{
-            "name": "User",
-            "image": "img/avatar.jpg",
-            "msg": "Hii !! How Are You"
-        }, {
-            "name": "User",
-            "image": "img/avatar.jpg",
-            "msg": "Hii !! How Are You"
-        }, {
-            "name": "User",
-            "image": "img/avatar.jpg",
-            "msg": "Hii !! How Are You"
-        }, {
-            "name": "User",
-            "image": "img/avatar.jpg",
-            "msg": "Hii !! How Are You"
-        }, {
-            "name": "User",
-            "image": "img/avatar.jpg",
-            "msg": "Hii !! How Are You"
-        }, {
-            "name": "User",
-            "image": "img/avatar.jpg",
-            "msg": "Hii !! How Are You"
-        },{
-            "name": "User",
-            "image": "img/avatar.jpg",
-            "msg": "Hii !! How Are You"
-        },{
-            "name": "User",
-            "image": "img/avatar.jpg",
-            "msg": "Hii !! How Are You"
-        },{
-            "name": "User",
-            "image": "img/avatar.jpg",
-            "msg": "Hii !! How Are You"
-        }];
+        parseService.getUserData().then(function(data) {
+            var arr = [];
+            arr = JSON.stringify(data);
+            var lists = JSON.parse(arr);
+            $scope.lists = lists;
+            $scope.$apply();
+        });
     }
 })();
