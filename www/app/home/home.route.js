@@ -3,7 +3,7 @@
 
     angular.module('starter')
         .config(function($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise('/')
+//            /$urlRouterProvider.otherwise('/')
             $stateProvider.state('home', {
                 url: '/home',
                 templateUrl: 'app/home/home.html',

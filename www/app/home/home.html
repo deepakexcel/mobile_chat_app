@@ -1,7 +1,23 @@
 <ion-pane style="background-image:url(img/bg2.jpg);">
     <ion-header-bar class="bar-stable">
-        <img src="img/logo2.png" height="38" width="38">  <h5>Welcome  {{googleUser.name}}</h5>
+        <h2><i class="icon ion-android-more-vertical" ng-click="showLeftMenu()"></i></h2> &nbsp; &nbsp; <img src="img/logo2.png" height="38" width="38"><h5>Welcome  {{googleUser.name}}</h5>
     </ion-header-bar>
+    <ion-content ng-show="show" class="z-index leftMenu">
+        <div class="list listItems">
+
+            <a class="item item-avatar" href="#">
+                <img src="img/avatar.jpg">
+                <h2>Name</h2>
+            </a>
+            <a class="item" href="#">
+
+                <h2><i class="icon ion-settings"></i> Setting</h2>
+            </a>
+            <a class="item" href="#">
+                <h2><i class="icon ion-log-out"></i> Logout</h2>
+            </a>
+        </div>
+    </ion-content>
     <ion-content class="padding">
         <div class="list card">
             <div class="list" >
