@@ -6,7 +6,6 @@
     .controller('homeController', homeController);
 
     function homeController($scope, $rootScope, $state, googleLogin, parseService) {
-
         parseService.getUserData().then(function(data) {
             var arr = [];
             arr = JSON.stringify(data);

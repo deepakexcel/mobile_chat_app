@@ -4,16 +4,18 @@
     </ion-header-bar>
     <ion-content class="padding">
         <div class="list card">
-            <div class="list" >
+           
                 <div ng-repeat="list in lists">
+                    <hr>
                     <a class="item item-avatar" href="#">
                         <img src="img/avatar.jpg">
                         <h2>{{list.email}}  <i class="icon ion-android-chat"></i></h2>
                         <p>{{list.username}}</p>
+                        
                     </a>
 
 
-                </div>
+            
             </div>
         </div>
     </ion-content>
