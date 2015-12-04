@@ -15,8 +15,6 @@
             var q2 = new Parse.Query(User);
             return q2.find({
                 success: function(items) {
-                    //console.log(items);
-
                 }
             });
         };
