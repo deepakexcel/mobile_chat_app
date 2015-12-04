@@ -16,6 +16,7 @@
                 $state.go('home');
             }, function(data) {
                 $scope.googleUser = data;
+                console.log($scope.googleUser.name);
             });
         };
         facebookLogin.timeout();
