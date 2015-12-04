@@ -5,17 +5,8 @@
 
             .controller('homeController', homeController);
 
-    function homeController($scope, $rootScope, $state, googleLogin, parseService) {
-        $scope.show = false;
-        $scope.showLeftMenu = function() {
-            $scope.show = !$scope.show;
-        };
-        parseService.getUserData().then(function(data) {
-            var arr = [];
-            arr = JSON.stringify(data);
-            var lists = JSON.parse(arr);
-            $scope.lists = lists;
-            $scope.$apply();
-        });
+    function homeController($scope, $rootScope, $state, googleLogin, parseService, homeService, userValidate) {
+        $scope.userName = homeService.get('user_name');
+        $scope.userPicture = homeService.get('user_picture');
     }
 })();

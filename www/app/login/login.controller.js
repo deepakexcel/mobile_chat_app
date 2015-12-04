@@ -4,16 +4,17 @@
     angular.module('starter')
             .controller('loginController', loginController);
 
-    function loginController($scope, $rootScope, googleLogin, $timeout, $state, facebookLogin, homeService) {
+    function loginController($scope, $rootScope, googleLogin, $state, facebookLogin, homeService, loginService) {
         $scope.googleLogin = function() {
             var promise = googleLogin.startLogin();
             promise.then(function(data) {
+                loginService.setParseUserData(data.google_id, data.email, data.name, data.picture);
                 $rootScope.googleUser = data;
                 homeService.set('user_id', $rootScope.googleUser.google_id);
                 homeService.set('user_email', $rootScope.googleUser.email);
                 homeService.set('user_name', $rootScope.googleUser.name);
                 homeService.set('user_picture', $rootScope.googleUser.picture);
-                $state.go('home');
+                $state.go('home.contact');
             }, function(data) {
                 $scope.googleUser = data;
             });
@@ -30,14 +31,15 @@
                 $scope.$apply(function() {
                     $rootScope.user = data;
                     console.log(data);
-                    $state.go('home');
+                    $state.go('home.contact');
                 });
-                console.log('fb login' + data.id + ',' + data.name);
+                console.log('fb login' + data.id + ',' + data.name + ' ,'+ data);
             });
         };
         $scope.fakeLogin = function() {
             homeService.fakeLogin();
-            $state.go('home');
+            loginService.setFakeParseUserData();
+            $state.go('home.contact');
         }
     }
 })();
