@@ -1,4 +1,4 @@
-(function() {
+ (function() {
     'use strict';
     angular.module('starter')
             .factory('loginService', loginService);
@@ -12,21 +12,31 @@
         service.setParseUserData = function(userId, userEmail, userName, userPicture) {
             service.parseIntialize();
             var users = Parse.Object.extend("users");
-            var user = new users();
-            
-            user.set("userId", userId);
-            user.set("userEmail", userEmail);
-            user.set("userName", userName);
-            user.set("userPicture", userPicture);
-            user.set("lastSeen", date);
-            user.save(null, {
-                success: function(user) {
+            var query = new Parse.Query(users);
+            query.equalTo("userEmail", userEmail);
+            query.find({
+                success: function(results) {
+                    if (results.length == 0) {
+                        var user = new users();
+                        user.set("userId", userId);
+                        user.set("userEmail", userEmail);
+                        user.set("userName", userName);
+                        user.set("userPicture", userPicture);
+                        user.set("lastSeen", date);
+                        user.save(null, {
+                            success: function(user) {
+                            },
+                            error: function(user, error) {
+                                $log.error('Failed to create new object, with error code: ' + error.message);
+                            }
+                        });
+                    }
+
                 },
-                error: function(user, error) {
-                    $log.error('Failed to create new object, with error code: ' + error.message);
+                error: function(error) {
+                    alert("Error: " + error.code + " " + error.message);
                 }
             });
-
         };
         service.setFakeParseUserData = function() {
             service.parseIntialize();

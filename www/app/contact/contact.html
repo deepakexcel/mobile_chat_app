@@ -4,9 +4,9 @@
         <div ng-repeat="list in lists" ng-click="chatUser(list)">
             <hr>
             <a class="item item-avatar hover">
-                <img src="img/avatar.jpg">
-                <h2>{{list.email}}  <i class="icon ion-android-chat"></i></h2>
-                <p>{{list.username}}</p>
+                <img src="{{list.userPicture}}">
+                <h2>{{list.userName}}  <i class="icon ion-ios-circle-filled {{list.userDisplay}}"></i></h2>
+                <p>Last Seen : {{list.userShow}}</p>
 
             </a>
 

@@ -8,13 +8,15 @@
         service.parseIntialize = function() {
             Parse.initialize(appConfig.appID, appConfig.jsKey);
         };
-        service.getUserData = function() {
+        service.getUserData = function(email) {
             service.parseIntialize();
             var User = Parse.Object.extend("users");
             var User = new User();
             var q2 = new Parse.Query(User);
+            q2.notEqualTo("userEmail", email);
             return q2.find({
                 success: function(items) {
+                    //console.log(JSON.stringify(items));
                 }
             });
         };
@@ -25,19 +27,17 @@
             var query = new Parse.Query(LastSeen);
             query.equalTo("userEmail", email);
             query.first({
-                            success: function (LastSeen) {
-                                LastSeen.save(null, {
-                                    success: function (LastSeen) {
-                                        
-                                        LastSeen.set("lastSeen", date);
-                                        
-                                            LastSeen.save();
-                                        
-                                    }
-                                });
+                success: function(LastSeen) {
+                    LastSeen.save(null, {
+                        success: function(LastSeen) {
+                            LastSeen.set("lastSeen", date);
+                            LastSeen.set("userStatus","Online");
+                            LastSeen.save();
+                        }
+                    });
 
-                            }
-                        });
+                }
+            });
 
         };
 
