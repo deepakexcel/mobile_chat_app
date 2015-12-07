@@ -5,10 +5,7 @@
 
     .controller('chatController', chatController);
 
-    function chatController($scope,$stateParams, $localStorage, $rootScope, $state, parseService, homeService, fireBaseService, chatService) {
-        $scope.chatUserId = $stateParams.userId;
-        $scope.userId = homeService.get('user_id');
-        chatService.createGroupChat($scope.userId,$scope.chatUserId);
+    function chatController($scope, $localStorage, $rootScope, $state, parseService, homeService, fireBaseService) {
         var myDataRef = fireBaseService.fireBaseIntialize();
         fireBaseService.Initial(myDataRef);
         $scope.send = function() {

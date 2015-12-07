@@ -21,26 +21,40 @@
             });
         };
         service.logOut = function(email) {
+            var date = $filter('date')(date, "medium");
+            service.parserEvent(date, "offline", "dark", email);
+
+        };
+        service.parserResume = function(email) {
+            service.parserEvent("Online", "Online", "balanced", email);
+
+        };
+        service.parserPause = function(email) {
+            var date = $filter('date')(key.lastSeen.iso, "medium");
+            service.parserEvent(date, "away", "dark", email);
+        };
+        service.statusLoginUser = function(email) {
+            service.parserEvent("Online", "Online", "balanced", email);
+        };
+        service.parserEvent = function(date, status, display, email) {
             service.parseIntialize();
-            var update = Parse.Object.extend("users");
-            var update = new update();
-            var query = new Parse.Query(update);
+            var events = Parse.Object.extend("users");
+            var events = new events();
+            var query = new Parse.Query(events);
             query.equalTo("userEmail", email);
             query.first({
-                success: function(update) {
-                    update.save(null, {
-                        success: function(update) {
-                            date = new Date();
-                            var date = $filter('date')(date, "medium");
-                            update.set("userStatus", "offline");
-                            update.set("userDisplay", "assertive");
-                            update.set("userShow", date);
-                            update.save();
+                success: function(results) {
+                    events.save(null, {
+                        success: function(events) {
+                            events.set("userShow", date);
+                            events.set("userStatus", status);
+                            events.set("iconColor", display);
+                            events.save();
                         }
                     });
+
                 }
             });
-
         };
 
         return service;

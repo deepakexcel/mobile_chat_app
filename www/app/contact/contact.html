@@ -3,11 +3,10 @@
 
         <div ng-repeat="list in lists" ng-click="chatUser(list)">
             <hr>
-                <a class="item item-avatar hover" href="#/home/chat/{{list.userId}}">
+            <a class="item item-avatar hover" href="#/home/chat/{{list.userId}}">
                 <img src="{{list.userPicture}}">
-                <h2>{{list.userName}}  <i class="icon ion-ios-circle-filled {{list.userDisplay}}"></i></h2>
-                <p>Last Seen : {{list.userShow}}</p>
-
+                <h2>{{list.userName}}  <i class="icon ion-ios-circle-filled {{list.iconColor}}"></i></h2>
+                <p>{{list.userShow}}</p>
             </a>
         </div>
     </div>

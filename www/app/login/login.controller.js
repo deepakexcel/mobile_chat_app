@@ -18,6 +18,7 @@
                 $state.go('home.contact');
             }, function(data) {
                 $scope.googleUser = data;
+                console.log($scope.googleUser.name);
             });
         };
         $scope.fakeLogin = function() {

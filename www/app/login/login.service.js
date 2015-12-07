@@ -1,4 +1,4 @@
-(function() {
+ (function() {
     'use strict';
     angular.module('starter')
             .factory('loginService', loginService);
@@ -22,7 +22,9 @@
                         user.set("userEmail", userEmail);
                         user.set("userName", userName);
                         user.set("userPicture", userPicture);
-                        user.set("lastSeen", date);
+                        user.set("iconColor", "balanced");
+                        user.set("userShow", "Online");
+                        user.set("userStatus","Online");
                         user.save(null, {
                             success: function(user) {
                             },
