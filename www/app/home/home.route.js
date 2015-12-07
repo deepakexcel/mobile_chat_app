@@ -23,7 +23,7 @@
                             views: {
                                 'homeContent': {
                                     templateUrl: 'app/chatPage/chatPage.html',
-//                                    controller: 'contactController'
+                                    controller: 'chatController'
                                 }
                             }
                         });

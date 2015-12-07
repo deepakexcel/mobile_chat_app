@@ -9,7 +9,7 @@
             Parse.initialize(appConfig.appID, appConfig.jsKey);
         };
 
-        service.updateDisplay = function(color,status,email) {
+        service.updateDisplay = function(color, status, email) {
             service.parseIntialize();
             var update = Parse.Object.extend("users");
             var update = new update();
@@ -19,8 +19,8 @@
                 success: function(update) {
                     update.save(null, {
                         success: function(update) {
-                            update.set("userShow", status);
-                            update.set("userDisplay", color);
+                            update.set("userShow",status);
+                            update.set("iconColor",color);
 
                             update.save();
                         }
@@ -28,7 +28,9 @@
                 }
             });
         };
-
+        service.statusUser = function(email) {
+            service.updateUser("Online", "Online", "balanced", email);
+        };
         service.updateStatus = function(data) {
             var arr = [];
             arr = JSON.stringify(data);
@@ -36,17 +38,35 @@
             return _.each(lists, function(key, value) {
                 if (key.userStatus == "Online") {
 
-                    service.updateDisplay("balanced",key.UserStatus,key.userEmail);
+                    service.updateDisplay("balanced", key.UserStatus, key.userEmail);
 
                 } else {
                     var date = $filter('date')(key.lastSeen.iso, "medium");
-                    service.updateDisplay("assertive",date,key.userEmail);
+                    service.updateDisplay("dark", date, key.userEmail);
                 }
             });
 
         };
+        service.updateUser = function(status, show, display, email) {
+            service.parseIntialize();
+            var update = Parse.Object.extend("users");
+            var update = new update();
+            var query = new Parse.Query(update);
+            query.equalTo("userEmail", email);
+            query.first({
+                success: function(update) {
+                    update.save(null, {
+                        success: function(update) {
+                            update.set("userStatus", status);
+                            update.set("userShow", show);
+                            update.set("iconColor", display);
 
-
+                            update.save();
+                        }
+                    });
+                }
+            });
+        };
         return service;
     }
 })();

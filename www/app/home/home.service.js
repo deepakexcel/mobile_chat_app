@@ -1,4 +1,4 @@
-(function() {
+ (function() {
     'use strict';
     angular.module('starter')
             .factory('homeService', homeService);
@@ -10,6 +10,9 @@
             },
             get: function(key) {
                 return $localStorage[key];
+            },
+            removeAll: function() {
+                $localStorage.$reset();
             },
             fakeLogin: function() {
                 this.set('user_name', faker.name.findName());

@@ -3,7 +3,7 @@
     angular.module('starter')
         .factory('parseService', parseService);
 
-    function parseService(appConfig) {
+    function parseService(appConfig, $filter) {
         var service = {};
         service.parseIntialize = function() {
             Parse.initialize(appConfig.appID, appConfig.jsKey);
@@ -16,26 +16,28 @@
             q2.notEqualTo("userEmail", email);
             return q2.find({
                 success: function(items) {
-                    //console.log(JSON.stringify(items));
+
                 }
             });
         };
-        service.lastSeenUpdate = function(email, date) {
+        service.logOut = function(email) {
             service.parseIntialize();
-            var LastSeen = Parse.Object.extend("users");
-            var LastSeen = new LastSeen();
-            var query = new Parse.Query(LastSeen);
+            var update = Parse.Object.extend("users");
+            var update = new update();
+            var query = new Parse.Query(update);
             query.equalTo("userEmail", email);
             query.first({
-                success: function(LastSeen) {
-                    LastSeen.save(null, {
-                        success: function(LastSeen) {
-                            LastSeen.set("lastSeen", date);
-                            LastSeen.set("userStatus","Online");
-                            LastSeen.save();
+                success: function(update) {
+                    update.save(null, {
+                        success: function(update) {
+                            date = new Date();
+                            var date = $filter('date')(date, "medium");
+                            update.set("userStatus", "offline");
+                            update.set("iconColor", "dark");
+                            update.set("userShow", date);
+                            update.save();
                         }
                     });
-
                 }
             });
 
