@@ -7,7 +7,7 @@
         var service = {};
 
         service.fireBaseIntialize = function() {
-            var myDataRef = new Firebase('https://chatappverson1.firebaseio.com/');
+            var myDataRef = new Firebase(appConfig.firebaseId);
             return myDataRef;
         };
 
@@ -19,17 +19,27 @@
                 name: name,
                 text: msg
             });
-
             myDataRef.on('child_added', function(snapshot) {
                 var message = snapshot.val();
                 service.displayChatMessage(message.name, message.text);
             });
-
         };
+        service.Initial = function(myDataRef) {
 
+            service.fireBaseIntialize();
+
+            myDataRef.push({
+                
+            });
+            myDataRef.on('child_added', function(snapshot) {
+                var message = snapshot.val();
+                service.displayChatMessage(message.name, message.text);
+            });
+        };
+        
         service.displayChatMessage = function(name, text) {
             var myEl = angular.element(document.querySelector('#divID'));
-            myEl.append('<ul class="list"><li class="item">' + name + ' : ' + text + '<br/></li></ul>');
+            myEl.append('<ul class="list"><li class="item balanced" >' + name + ' : ' + text + '<br/></li></ul>');
         };
 
         return service;

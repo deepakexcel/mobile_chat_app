@@ -6,7 +6,7 @@
     .controller('contactController', contactController);
 
     function contactController($scope, $rootScope, $state, $localStorage, $timeout, parseService, homeService, contactService) {
-        contactService.statusUser($localStorage.user_email);
+        contactService.statusLoginUser($localStorage.user_email);
         $scope.onTimeout = function() {
             parseService.getUserData($localStorage.user_email).then(function(data) {
 
@@ -16,7 +16,6 @@
                 var lists = li.reverse();
                 $scope.lists = lists;
                 $scope.$apply($scope.lists);
-                contactService.updateStatus(lists);
 
             });
 
