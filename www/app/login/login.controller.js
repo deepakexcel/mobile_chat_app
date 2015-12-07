@@ -4,7 +4,8 @@
     angular.module('starter')
             .controller('loginController', loginController);
 
-    function loginController($scope, $rootScope, googleLogin, $state, facebookLogin, homeService, loginService) {
+    function loginController($scope, $rootScope, googleLogin, $state, facebookLogin, homeService, loginService, userValidate, $timeout, $q) {
+        userValidate.validUser();
         $scope.googleLogin = function() {
             var promise = googleLogin.startLogin();
             promise.then(function(data) {
@@ -19,27 +20,17 @@
                 $scope.googleUser = data;
             });
         };
-        facebookLogin.timeout();
-        $scope.facebookLogin = function() {
-            var data = facebookLogin.login();
-            console.log(data);
-            self.getData();
-        };
-        self.getData = function() {
-            facebookConnectPlugin.api('/me', ['public_profile'], function(data) {
-                console.log(data);
-                $scope.$apply(function() {
-                    $rootScope.user = data;
-                    console.log(data);
-                    $state.go('home.contact');
-                });
-                console.log('fb login' + data.id + ',' + data.name + ' ,'+ data);
-            });
-        };
         $scope.fakeLogin = function() {
-            homeService.fakeLogin();
             loginService.setFakeParseUserData();
             $state.go('home.contact');
         }
+
+  $scope.facebookLogin = function() {
+    facebookLogin.login();
+    
+  };
+
+
+
     }
 })();

@@ -19,11 +19,11 @@
                             }
                         })
                         .state('home.chat', {
-                            url: '/chat',
+                            url: '/chat/:userId',
                             views: {
                                 'homeContent': {
-                                    templateUrl: 'app/chatPage/chatPage.html',
-//                                    controller: 'contactController'
+                                    templateUrl: 'app/chat/chatPage.html',
+                                    controller: 'chatController'
                                 }
                             }
                         });
