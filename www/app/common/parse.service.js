@@ -13,6 +13,7 @@
             var User = Parse.Object.extend("users");
             var User = new User();
             var q2 = new Parse.Query(User);
+            q2.ascending("userShow");
             q2.notEqualTo("userEmail", email);
             return q2.find({
                 success: function(items) {

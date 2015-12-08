@@ -18,5 +18,6 @@
             homeService.removeAll();
             $state.go('login');
         };
+
     }
 })();

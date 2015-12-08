@@ -5,6 +5,7 @@
 
     .controller('chatController', chatController);
 
+
     function chatController($scope, $stateParams, $localStorage, $rootScope, $state, parseService, homeService, fireBaseService, chatService) {
         var chatUserId = $stateParams.userId;
         var userId = homeService.get('user_id');
@@ -19,16 +20,16 @@
                 //     function() {});
             },
             function() {});
+
+        var myDataRef = fireBaseService.fireBaseIntialize();
+        fireBaseService.Initial(myDataRef);
+        console.log("Hiii");
         $scope.send = function() {
             chatService.saveChat($scope.groupId, userId, $scope.msg);
+            var myDataRef = fireBaseService.fireBaseIntialize();
+            fireBaseService.fireBasePush($scope.myDataRef, $localStorage.user_name, this.msg);
+            this.msg = " ";
             $scope.msg = '';
-        }
-
-        // var myDataRef = fireBaseService.fireBaseIntialize();
-        // fireBaseService.Initial(myDataRef);
-        // $scope.send = function() {
-        //     var myDataRef = fireBaseService.fireBaseIntialize();
-        //     fireBaseService.fireBasePush($scope.myDataRef, $localStorage.user_name, this.msg);
-        // };
+        };
     }
 })();

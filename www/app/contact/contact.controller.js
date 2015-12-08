@@ -4,7 +4,6 @@
     angular.module('starter')
     .controller('contactController', contactController);
     function contactController($scope, $rootScope, $state, $localStorage, $timeout, parseService, homeService, contactService) {
-        
         $scope.onTimeout = function() {
             parseService.getUserData($localStorage.user_email).then(function(data) {
                 var arr = [];
