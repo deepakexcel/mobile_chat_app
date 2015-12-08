@@ -1,4 +1,4 @@
- (function() {
+(function() {
     'use strict';
     angular.module('starter')
         .factory('parseService', parseService);
@@ -21,42 +21,97 @@
             });
         };
         service.logOut = function(email) {
-            var date = $filter('date')(date, "medium");
-            service.parserEvent(date, "offline", "dark", email);
+            var date = new Date();
+            var string = "Last seen " + date;
+
+            service.parserEvent(string, "offline", "dark", email);
 
         };
+        service.logIn = function(email) {
+            service.parserEvent("Online", "Online", "balanced", email);
+
+        };
+
         service.parserResume = function(email) {
             service.parserEvent("Online", "Online", "balanced", email);
 
         };
         service.parserPause = function(email) {
-            var date = $filter('date')(key.lastSeen.iso, "medium");
-            service.parserEvent(date, "away", "dark", email);
+            var date = new Date();
+            var string = "Last seen " + date;
+            service.parserEvent(string, "away", "dark", email);
         };
         service.statusLoginUser = function(email) {
+            console.log(email);
             service.parserEvent("Online", "Online", "balanced", email);
         };
         service.parserEvent = function(date, status, display, email) {
+
             service.parseIntialize();
-            var events = Parse.Object.extend("users");
-            var events = new events();
-            var query = new Parse.Query(events);
+            var users = Parse.Object.extend("users");
+            var query = new Parse.Query(users);
             query.equalTo("userEmail", email);
             query.first({
-                success: function(results) {
-                    events.save(null, {
-                        success: function(events) {
-                            events.set("userShow", date);
-                            events.set("userStatus", status);
-                            events.set("iconColor", display);
-                            events.save();
+                success: function(users) {
+                    users.save(null, {
+                        success: function(users) {
+
+                            console.log(date);
+                            users.set("userStatus", status);
+                            users.set("userShow", date);
+                            users.set("iconColor", display);
+                            users.save();
+
                         }
                     });
 
                 }
             });
         };
+        service.logInNew = function(userId, userEmail, userName, userPicture) {
+            service.parseIntialize();
+            var users = Parse.Object.extend("users");
+            var query = new Parse.Query(users);
+            query.equalTo("userEmail", userEmail);
+            query.find({
+                success: function(results) {
+                    if (results.length == 0) {
+                        service.loginNew(userId, userEmail, userName, userPicture);
+                    } else {
+                        service.logIn(userEmail);
+                    }
 
+                },
+                error: function(error) {
+                    alert("Error: " + error.code + " " + error.message);
+                }
+            });
+
+        };
+        service.loginfakeNew = function(userId, userEmail, userName, userPicture) {
+            service.loginNew(userId, userEmail, userName, userPicture);
+        };
+        service.loginNew = function(userId, userEmail, userName, userPicture) {
+            var date= new Date();
+            service.parseIntialize();
+            var users = Parse.Object.extend("users");
+            var user = new users();
+            user.set("userId", userId);
+            user.set("userEmail", userEmail);
+            user.set("userName", userName);
+            user.set("userPicture", userPicture);
+            user.set("lastSeen", date);
+            user.set("userStatus", "Online");
+            user.set("userShow", "Online");
+            user.set("iconColor", "balanced");
+            user.set("userDisplay", "assertive");
+            user.save(null, {
+                success: function(user) {},
+                error: function(user, error) {
+                    $log.error('Failed to create new object, with error code: ' + error.message);
+                }
+            });
+        };
         return service;
     }
 })();

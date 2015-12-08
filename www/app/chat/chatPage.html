@@ -5,15 +5,20 @@
 
     <ion-content class="padding">
     <div id="divID">
+    <p>{{msg.message}}</p>
     </div>
+    <ul class="list" ng-repeat="history in chatHistory">
+    <li class="item balanced bubble"> {{history.message}}
+    </li>
+    </ul>
     </ion-content>
-  <ion-footer-bar class="bar-stable">
-         <label class="item-input-wrapper">
-                      <textarea ng-model="msg" value="" placeholder="Send a message..." ></textarea>
-                  </label>
-                  <div class="footer-btn-wrap">
-                    <button class="button button-icon icon ion-android-send footer-btn" type="submit" ng-click="send()">
-                    </button>
-                  </div>
-              </ion-footer-bar>   
+<ion-footer-bar keyboard-attach class="item-input-inset">
+
+    <label class="item-input-wrapper">
+      <i class="icon ion-ios7-search placeholder-icon"></i>
+      <input type="text" placeholder="Write a Message ..." ng-model="msg">
+    </label>
+    <a class="button button-icon icon ion-android-send footer-btn calm" type="submit" ng-click="send()">
+    </a>
+  </ion-footer-bar>
 </ion-pane>

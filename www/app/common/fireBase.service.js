@@ -1,4 +1,4 @@
-(function() {
+ (function() {
     'use strict';
     angular.module('starter')
         .factory('fireBaseService', fireBaseService);
@@ -13,20 +13,21 @@
 
         service.fireBasePush = function(myDataRef, name, msg) {
 
-            service.fireBaseIntialize();
+            var myDataRef=service.fireBaseIntialize();
 
             myDataRef.push({
                 name: name,
                 text: msg
             });
             myDataRef.on('child_added', function(snapshot) {
+                console.log("Hiii");
                 var message = snapshot.val();
                 service.displayChatMessage(message.name, message.text);
             });
         };
         service.Initial = function(myDataRef) {
 
-            service.fireBaseIntialize();
+            var myDataRef=service.fireBaseIntialize();
 
             myDataRef.push({
                 
@@ -39,7 +40,7 @@
         
         service.displayChatMessage = function(name, text) {
             var myEl = angular.element(document.querySelector('#divID'));
-            myEl.append('<ul class="list"><li class="item balanced" >' + name + ' : ' + text + '<br/></li></ul>');
+            myEl.prepend('<ul class="list"><li class="item balanced bubble">' + name + ' : ' + text + '<br/></li></ul>');
         };
 
         return service;

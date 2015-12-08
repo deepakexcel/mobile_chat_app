@@ -4,7 +4,7 @@
     angular.module('starter')
     .controller('contactController', contactController);
     function contactController($scope, $rootScope, $state, $localStorage, $timeout, parseService, homeService, contactService) {
-        contactService.statusLoginUser($localStorage.user_email);
+        
         $scope.onTimeout = function() {
             parseService.getUserData($localStorage.user_email).then(function(data) {
                 var arr = [];
@@ -18,9 +18,5 @@
             $timeout($scope.onTimeout, 10000);
         }
         $timeout($scope.onTimeout, 1000);
-        $scope.chatUser = function(chatUser) {
-            $scope.singlechatUser = chatUser;
-            $state.go('home.chat');
-        }
     }
 })();

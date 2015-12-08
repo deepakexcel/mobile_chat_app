@@ -1,7 +1,12 @@
 (function() {
     'use strict';
     angular.module('starter', ['ionic', 'GoogleLoginService', 'facebookLoginService', 'ngStorage'])
-        .run(function($ionicPlatform, userValidate, $rootScope, parseService) {
+        .run(function($ionicPlatform, userValidate, $rootScope, parseService, $state) {
+            $rootScope.$on('$stateChangeSuccess',
+                function(event, toState, toParams, fromState, fromParams) {
+                    userValidate.validUser(toState.name);
+                }
+            )
             $ionicPlatform.on('resume', function() {
                 eventService.resumeEvent();
             });
@@ -16,7 +21,6 @@
                 if (window.StatusBar) {
                     StatusBar.styleDefault();
                 }
-                // userValidate.validUser();
             });
         })
 

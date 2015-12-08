@@ -5,15 +5,30 @@
 
     .controller('chatController', chatController);
 
-    function chatController($scope,$stateParams, $localStorage, $rootScope, $state, parseService, homeService, fireBaseService, chatService) {
-        $scope.chatUserId = $stateParams.userId;
-        $scope.userId = homeService.get('user_id');
-        chatService.createGroupChat($scope.userId,$scope.chatUserId);
-        var myDataRef = fireBaseService.fireBaseIntialize();
-        fireBaseService.Initial(myDataRef);
+    function chatController($scope, $stateParams, $localStorage, $rootScope, $state, parseService, homeService, fireBaseService, chatService) {
+        var chatUserId = $stateParams.userId;
+        var userId = homeService.get('user_id');
+
+        chatService.createGroupChat(userId, chatUserId).then(function(groupId) {
+                $scope.groupId = groupId;
+                // chatService.chatHistory($scope.groupId).then(function(response) {
+                //     console.log(response);
+                //     $scope.chatHistory = response; 
+
+                //     },
+                //     function() {});
+            },
+            function() {});
         $scope.send = function() {
-            var myDataRef = fireBaseService.fireBaseIntialize();
-            fireBaseService.fireBasePush($scope.myDataRef, $localStorage.user_name, this.msg);
-        };
+            chatService.saveChat($scope.groupId, userId, $scope.msg);
+            $scope.msg = '';
+        }
+
+        // var myDataRef = fireBaseService.fireBaseIntialize();
+        // fireBaseService.Initial(myDataRef);
+        // $scope.send = function() {
+        //     var myDataRef = fireBaseService.fireBaseIntialize();
+        //     fireBaseService.fireBasePush($scope.myDataRef, $localStorage.user_name, this.msg);
+        // };
     }
 })();

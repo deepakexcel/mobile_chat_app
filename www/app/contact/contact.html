@@ -1,32 +1,32 @@
 <ion-content class="padding">
-    <div class="list card">
+<div class="list card">
 
-        <div ng-repeat="list in lists" ng-click="chatUser(list)">
-            <hr>
-            <a class="item item-avatar hover" href="#/home/chat/{{list.userId}}">
-                <img src="{{list.userPicture}}">
-                <h2>{{list.userName}}  <i class="icon ion-ios-circle-filled {{list.iconColor}}"></i></h2>
-                <p>{{list.userShow}}</p>
-            </a>
-        </div>
+    <div ng-repeat="list in lists">
+        <hr>
+        <a class="item item-avatar hover" href="#/home/chat/{{list.userId}}">
+            <img ng-src="{{list.userPicture}}">
+            <h2>{{list.userName}}  <i class="icon ion-ios-circle-filled {{list.iconColor}}"></i></h2>
+            <p>{{list.userShow}}</p>
+        </a>
     </div>
+</div>
 </ion-content>
 <ion-footer-bar class="bar-stable">
-    <div class="tabs-striped tabs-color-assertive">
-        <div class="tabs">
-            <a class="tab-item active" href="#">
-                <i class="icon ion-android-textsms"></i>
-                Chats
-            </a>
-            <a class="tab-item" href="#">
-                <i class="icon ion-ios-people"></i>
-                Groups
-            </a>
-            <a class="tab-item" href="#">
-                <i class="icon ion-android-person"></i>
-                Settings
-            </a>
-        </div>
-    </div>
+<div class="tabs-striped tabs-color-assertive">
+    <div class="tabs">
+        <a class="tab-item active" href="#">
+           <i class="icon ion-android-textsms"></i>
+           Chats
+       </a>
+       <a class="tab-item" href="#">
+        <i class="icon ion-ios-people"></i>
+        Groups
+    </a>
+    <a class="tab-item" href="#">
+        <i class="icon ion-android-person"></i>
+        Settings
+    </a>
+</div>
+</div>
 </ion-fotter-bar>
 </ion-pane>
