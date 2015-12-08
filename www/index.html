@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
         <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+         <meta http-equiv="Content-Security-Policy" content="script-src 'self'; object-src 'self'">
         <title></title>
         <link href="lib/ionic/css/ionic.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
@@ -29,11 +30,12 @@
         <script src="app/home/home.route.js"></script>
         <script src="app/home/home.service.js"></script>
         <script type="text/javascript" src="app/common/parse.service.js"></script>
-        <script type="text/javascript" src="app/common/fireBase.service.js"></script>
-        <script type="text/javascript" src="app/common/userValidate.service.js"></script>
+        <script type="text/javascript" src="app/common/firebase.service.js"></script>
+        <script type="text/javascript" src="app/common/uservalidate.service.js"></script>
         <script type="text/javascript" src="app/contact/contact.controller.js"></script>
         <script type="text/javascript" src="app/contact/contact.service.js"></script>
-        <script type="text/javascript" src="app/chatPage/chat.controller.js"></script>
+        <script type="text/javascript" src="app/chat/chat.controller.js"></script>
+        <script type="text/javascript" src="app/chat/chat.service.js"></script>
 
     </head>
     <body ng-app="starter" class="bg-color">

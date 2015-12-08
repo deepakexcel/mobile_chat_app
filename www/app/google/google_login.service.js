@@ -1,67 +1,67 @@
 var googleLoginService = angular.module('GoogleLoginService', ['ngStorage']);
-googleLoginService.factory('timeStorage', ['$localStorage', function ($localStorage) {
-        var timeStorage = {};
-        timeStorage.cleanUp = function () {
-            var cur_time = new Date().getTime();
-            for (var i = 0; i < localStorage.length; i++) {
-                var key = localStorage.key(i);
-                if (key.indexOf('_expire') === -1) {
-                    var new_key = key + "_expire";
-                    var value = localStorage.getItem(new_key);
-                    if (value && cur_time > value) {
-                        localStorage.removeItem(key);
-                        localStorage.removeItem(new_key);
-                    }
+googleLoginService.factory('timeStorage', ['$localStorage', function($localStorage) {
+    var timeStorage = {};
+    timeStorage.cleanUp = function() {
+        var cur_time = new Date().getTime();
+        for (var i = 0; i < localStorage.length; i++) {
+            var key = localStorage.key(i);
+            if (key.indexOf('_expire') === -1) {
+                var new_key = key + "_expire";
+                var value = localStorage.getItem(new_key);
+                if (value && cur_time > value) {
+                    localStorage.removeItem(key);
+                    localStorage.removeItem(new_key);
                 }
             }
-        };
-        timeStorage.remove = function (key) {
-            this.cleanUp();
-            var time_key = key + '_expire';
-            $localStorage[key] = false;
-            $localStorage[time_key] = false;
-        };
-        timeStorage.set = function (key, data, hours) {
-            this.cleanUp();
-            $localStorage[key] = data;
-            var time_key = key + '_expire';
-            var time = new Date().getTime();
-            time = time + (hours * 1 * 60 * 60 * 1000);
-            $localStorage[time_key] = time;
-        };
-        timeStorage.get = function (key) {
-            this.cleanUp();
-            var time_key = key + "_expire";
-            if (!$localStorage[time_key]) {
-                return false;
-            }
-            var expire = $localStorage[time_key] * 1;
-            if (new Date().getTime() > expire) {
-                $localStorage[key] = null;
-                $localStorage[time_key] = null;
-                return false;
-            }
-            return $localStorage[key];
-        };
-        return timeStorage;
-    }]);
+        }
+    };
+    timeStorage.remove = function(key) {
+        this.cleanUp();
+        var time_key = key + '_expire';
+        $localStorage[key] = false;
+        $localStorage[time_key] = false;
+    };
+    timeStorage.set = function(key, data, hours) {
+        this.cleanUp();
+        $localStorage[key] = data;
+        var time_key = key + '_expire';
+        var time = new Date().getTime();
+        time = time + (hours * 1 * 60 * 60 * 1000);
+        $localStorage[time_key] = time;
+    };
+    timeStorage.get = function(key) {
+        this.cleanUp();
+        var time_key = key + "_expire";
+        if (!$localStorage[time_key]) {
+            return false;
+        }
+        var expire = $localStorage[time_key] * 1;
+        if (new Date().getTime() > expire) {
+            $localStorage[key] = null;
+            $localStorage[time_key] = null;
+            return false;
+        }
+        return $localStorage[key];
+    };
+    return timeStorage;
+}]);
 
 
 googleLoginService.factory('googleLogin', [
     '$http', '$q', '$interval', '$log', 'timeStorage',
-    function ($http, $q, $interval, $log, timeStorage) {
+    function($http, $q, $interval, $log, timeStorage) {
         var service = {};
         service.access_token = false;
         service.redirect_url = 'http://localhost/chatApp/www/';
         service.client_id = '260184542051-h84jscnah15adeecfh77g5p69c78vg9c.apps.googleusercontent.com';
         service.secret = 'ugJ2MMyeWkhd1hya80Q1pZlP';
         service.scope = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me';
-        service.gulp = function (url, name) {
+        service.gulp = function(url, name) {
             url = url.substring(url.indexOf('?') + 1, url.length);
 
             return url.replace('code=', '');
         };
-        service.authorize = function (options) {
+        service.authorize = function(options) {
             var def = $q.defer();
             var self = this;
 
@@ -82,7 +82,7 @@ googleLoginService.factory('googleLogin', [
 
                 if (ionic.Platform.isWebView()) {
                     console.log('using in app browser');
-                    win.addEventListener('loadstart', function (data) {
+                    win.addEventListener('loadstart', function(data) {
                         console.log('load start');
                         if (data.url.indexOf(context.redirect_url) === 0) {
                             console.log('redirect url found ' + context.redirect_url);
@@ -93,14 +93,16 @@ googleLoginService.factory('googleLogin', [
                             if (access_code) {
                                 context.validateToken(access_code, def);
                             } else {
-                                def.reject({error: 'Access Code Not Found'});
+                                def.reject({
+                                    error: 'Access Code Not Found'
+                                });
                             }
                         }
 
                     });
                 } else {
-                   console.log('InAppBrowser not found11');
-                    var pollTimer = $interval(function () {
+                    console.log('InAppBrowser not found11');
+                    var pollTimer = $interval(function() {
                         try {
                             console.log("google window url " + win.document.URL);
                             if (win.document.URL.indexOf(context.redirect_url) === 0) {
@@ -115,22 +117,25 @@ googleLoginService.factory('googleLogin', [
                                     $log.info('Access Code: ' + access_code);
                                     context.validateToken(access_code, def);
                                 } else {
-                                    def.reject({error: 'Access Code Not Found'});
+                                    def.reject({
+                                        error: 'Access Code Not Found'
+                                    });
                                 }
                             }
-                        } catch (e) {
-                        }
+                        } catch (e) {}
                     }, 100);
                 }
             }
             return def.promise;
         };
-        service.validateToken = function (token, def) {
+        service.validateToken = function(token, def) {
             $log.info('Code: ' + token);
             var http = $http({
                 url: 'https://www.googleapis.com/oauth2/v3/token',
                 method: 'POST',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
                 params: {
                     code: token,
                     client_id: this.client_id,
@@ -141,7 +146,7 @@ googleLoginService.factory('googleLogin', [
                 }
             });
             var context = this;
-            http.then(function (data) {
+            http.then(function(data) {
                 $log.debug(data);
                 var access_token = data.data.access_token;
                 var expires_in = data.data.expires_in;
@@ -151,11 +156,13 @@ googleLoginService.factory('googleLogin', [
                     $log.info('Access Token :' + access_token);
                     context.getUserInfo(access_token, def);
                 } else {
-                    def.reject({error: 'Access Token Not Found'});
+                    def.reject({
+                        error: 'Access Token Not Found'
+                    });
                 }
             });
         };
-        service.getUserInfo = function (access_token, def) {
+        service.getUserInfo = function(access_token, def) {
             var http = $http({
                 url: 'https://www.googleapis.com/oauth2/v3/userinfo',
                 method: 'GET',
@@ -163,7 +170,7 @@ googleLoginService.factory('googleLogin', [
                     access_token: access_token
                 }
             });
-            http.then(function (data) {
+            http.then(function(data) {
                 $log.debug(data);
                 var user_data = data.data;
                 var user = {
@@ -177,7 +184,7 @@ googleLoginService.factory('googleLogin', [
                 def.resolve(user);
             });
         };
-        service.getUserFriends = function () {
+        service.getUserFriends = function() {
             var access_token = this.access_token;
             var http = $http({
                 url: 'https://www.googleapis.com/plus/v1/people/me/people/visible',
@@ -186,11 +193,11 @@ googleLoginService.factory('googleLogin', [
                     access_token: access_token
                 }
             });
-            http.then(function (data) {
+            http.then(function(data) {
                 console.log(data);
             });
         };
-        service.startLogin = function () {
+        service.startLogin = function() {
             var def = $q.defer();
             var promise = this.authorize({
                 client_id: this.client_id,
@@ -198,9 +205,9 @@ googleLoginService.factory('googleLogin', [
                 redirect_uri: this.redirect_url,
                 scope: this.scope
             });
-            promise.then(function (data) {
+            promise.then(function(data) {
                 def.resolve(data);
-            }, function (data) {
+            }, function(data) {
                 $log.error(data);
                 def.reject(data.error);
             });

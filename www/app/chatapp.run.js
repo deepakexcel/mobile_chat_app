@@ -16,7 +16,7 @@
                 if (window.StatusBar) {
                     StatusBar.styleDefault();
                 }
-                userValidate.validUser();
+                // userValidate.validUser();
             });
         })
 
