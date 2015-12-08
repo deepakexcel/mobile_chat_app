@@ -2,7 +2,6 @@
     'use strict';
     angular.module('starter')
         .factory('contactService', contactService);
-
     function contactService(appConfig, $filter, parseService) {
         var service = {};
         service.statusLoginUser = function(email) {

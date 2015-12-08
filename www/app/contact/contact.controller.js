@@ -1,10 +1,8 @@
-(function() {
+ (function() {
     'use strict';
 
     angular.module('starter')
-
     .controller('contactController', contactController);
-
     function contactController($scope, $rootScope, $state, $localStorage, $timeout, parseService, homeService, contactService) {
 
         $scope.onTimeout = function() {
@@ -16,11 +14,9 @@
                 $scope.lists = lists;
                 $scope.$apply($scope.lists);
             });
-
             $scope.date = new Date();
             $timeout($scope.onTimeout, 10000);
         }
-
         $timeout($scope.onTimeout, 1000);
 
     }

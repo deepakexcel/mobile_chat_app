@@ -1,0 +1,19 @@
+<ion-pane style="background-image:url(img/bg2.jpg);">
+    <ion-header-bar class="bar-stable">
+        <h1 class="title" style="text-align: center;">PostCard v1.0</h1>
+    </ion-header-bar>
+
+    <ion-content class="padding">
+    <div id="divID">
+    </div>
+    </ion-content>
+  <ion-footer-bar class="bar-stable">
+         <label class="item-input-wrapper">
+                      <textarea ng-model="msg" value="" placeholder="Send a message..." ></textarea>
+                  </label>
+                  <div class="footer-btn-wrap">
+                    <button class="button button-icon icon ion-android-send footer-btn" type="submit" ng-click="send()">
+                    </button>
+                  </div>
+              </ion-footer-bar>   
+</ion-pane>

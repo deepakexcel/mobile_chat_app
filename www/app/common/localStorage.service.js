@@ -1,9 +1,9 @@
- (function() {
+(function() {
     'use strict';
     angular.module('starter')
-            .factory('homeService', homeService);
+            .factory('localStorageService', localStorageService);
 
-    function homeService($localStorage) {
+    function localStorageService($localStorage) {
         return {
             set: function(key, value) {
                 $localStorage[key] = value;

@@ -3,7 +3,7 @@
     angular.module('starter')
         .factory('userValidate', userValidate);
 
-    function userValidate(homeService, $state) {
+    function userValidate(homeService, $state, $stateParams) {
         return {
             validUser: function() {
                 var userId = homeService.get('user_id');
