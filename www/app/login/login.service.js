@@ -4,7 +4,6 @@
             .factory('loginService', loginService);
 
     function loginService(appConfig, $log, homeService,contactService,$localStorage,parseService) {
-        var date = new Date();
         var service = {};
         service.parseIntialize = function() {
             Parse.initialize(appConfig.appID, appConfig.jsKey);

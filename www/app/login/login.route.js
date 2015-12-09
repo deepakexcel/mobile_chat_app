@@ -8,6 +8,7 @@
 
             $stateProvider.state('login', {
                 url: '/',
+                cache: false,
                 templateUrl: 'app/login/login.html',
                 controller: 'loginController'
             });

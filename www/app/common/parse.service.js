@@ -22,7 +22,7 @@
             });
         };
         service.logOut = function(email) {
-            var date = new Date();
+            var date = $filter('date')(new Date(),'medium');
             var string = "Last seen " + date;
 
             service.parserEvent(string, "offline", "dark", email);
@@ -35,10 +35,12 @@
 
         service.parserResume = function(email) {
             service.parserEvent("Online", "Online", "balanced", email);
+            console.log("Resume");
 
         };
         service.parserPause = function(email) {
-            var date = new Date();
+            console.log("Pause");
+            var date = $filter('date')(new Date(),'medium');
             var string = "Last seen " + date;
             service.parserEvent(string, "away", "dark", email);
         };
@@ -56,8 +58,6 @@
                 success: function(users) {
                     users.save(null, {
                         success: function(users) {
-
-                            console.log(date);
                             users.set("userStatus", status);
                             users.set("userShow", date);
                             users.set("iconColor", display);

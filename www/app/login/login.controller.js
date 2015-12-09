@@ -4,8 +4,10 @@
     angular.module('starter')
         .controller('loginController', loginController);
 
-    function loginController($scope, $rootScope, googleLogin, $state, facebookLogin, homeService, loginService, userValidate, $timeout, $q, contactService) {
-        $scope.googleLogin = function() {
+    function loginController($scope, $rootScope,$localStorage, googleLogin, $state, facebookLogin, homeService, loginService, userValidate, $timeout, $q, contactService) {
+            console.log('login');
+            userValidate.validUser();
+            $scope.googleLogin = function() {
             var promise = googleLogin.startLogin();
             promise.then(function(data) {
                 loginService.setParseUserData(data.google_id, data.email, data.name, data.picture);
@@ -15,7 +17,6 @@
                 homeService.set('user_name', $rootScope.googleUser.name);
                 homeService.set('user_picture', $rootScope.googleUser.picture);
                 $state.go('home.contact');
-
             }, function(data) {
                 $scope.googleUser = data;
                 console.log($scope.googleUser.name);
@@ -23,13 +24,13 @@
         };
         $scope.fakeLogin = function() {
             loginService.setFakeParseUserData();
+
             $state.go('home.contact');
         };
 
         $scope.facebookLogin = function() {
             facebookLogin.login();
             contactService.statusLoginUser($localStorage.user_email);
-
         };
 
 

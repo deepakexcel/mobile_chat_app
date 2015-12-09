@@ -13,8 +13,8 @@
         service.pauseEvent = function() {
             if ($localStorage.user_email) {
                 var email = $localStorage.user_email;
-                service.parseIntialize();
-                parseService.parsePause(email);
+                
+                parseService.parserPause(email);
             }
         };
         return service;
